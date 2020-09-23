@@ -8,19 +8,9 @@ namespace UserMaintenance.Entities
 {
 	public class User
 	{
-        public Guid ID { get; set; } = Guid.NewGuid();
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string FullName
-        {
-            get
-            {
-                return string.Format(
-                    "{0} {1}",
-                    LastName,
-                    FirstName);
-            }
-        }
+        public Guid ID { get; set; } = Guid.NewGuid();        
+        public string FullName { get; set; }
+
 
         // Ugyanaz a FullName property kompaktabb formában is írható
         /*
@@ -29,6 +19,6 @@ namespace UserMaintenance.Entities
                 "{0} {1}",
                 LastName,
                 FirstName);
-        */ 
+        */
     }
 }
