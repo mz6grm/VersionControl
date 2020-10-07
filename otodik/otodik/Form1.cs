@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace otodik
 {
@@ -65,6 +66,31 @@ namespace otodik
 				value += (decimal)last.Price * item.Volume;
 			}
 			return value;
+		}
+
+		private void btn_Save_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog sfd = new SaveFileDialog();
+			sfd.InitialDirectory = Application.StartupPath;
+			sfd.Filter = "Comma Seperated Values (*csv)|*.csv";
+			sfd.DefaultExt = "csv";
+			sfd.AddExtension = true;
+
+			if (sfd.ShowDialog() != DialogResult.OK)
+			{
+				return;
+			}
+
+			using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+			{
+				foreach (var s in Portfolio)
+				{
+					sw.Write(s.Index);
+					sw.Write(";");
+					sw.Write(s.Volume);
+					sw.WriteLine();
+				}
+			}
 		}
 	}
 }
