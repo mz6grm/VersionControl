@@ -16,7 +16,7 @@ namespace otodik
 	{
 		PortfolioEntities context = new PortfolioEntities();
 		List<Tick> Ticks;
-		List<PortfolioItem> Portfolio;
+		List<PortfolioItem> Portfolio = new List<PortfolioItem>();
 		public Form1()
 		{
 			InitializeComponent();
@@ -83,11 +83,15 @@ namespace otodik
 
 			using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
 			{
-				foreach (var s in Portfolio)
+				sw.Write("Időszak");
+				sw.Write(";");
+				sw.Write("Nyereség");
+				sw.WriteLine();
+				foreach (var s in Ticks)
 				{
-					sw.Write(s.Index);
+					sw.Write(s.Tick_id);
 					sw.Write(";");
-					sw.Write(s.Volume);
+					sw.Write(s.Price);
 					sw.WriteLine();
 				}
 			}
