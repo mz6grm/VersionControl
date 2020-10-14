@@ -1,4 +1,5 @@
-﻿using hatodik.MnbServiceReference;
+﻿using hatodik.Entities;
+using hatodik.MnbServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,11 +13,13 @@ using System.Windows.Forms;
 namespace hatodik
 {
 	public partial class Form1 : Form
-	{		
+	{
+		BindingList<RateData> Rates = new BindingList<RateData>();
 		public Form1()
 		{
 			InitializeComponent();
 			Fuggveny();
+			dataGridView1.DataSource = Rates;
 		}
 		
 		private void Fuggveny()
