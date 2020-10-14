@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 
 namespace hatodik
@@ -21,11 +22,14 @@ namespace hatodik
 			InitializeComponent();
 			Fuggveny();
 			dataGridView1.DataSource = Rates;
+			chartRateData.DataSource = Rates;
 			Fuggveny2();
+			Fuggveny3();
 		}
 		string result;
 		public void Fuggveny()
 		{
+			dataGridView1.DataSource = Rates;
 			var mnbService = new MNBArfolyamServiceSoapClient();
 			var request = new GetExchangeRatesRequestBody()
 			{
@@ -59,7 +63,25 @@ namespace hatodik
 				var value = decimal.Parse(childElement.InnerText);
 				if (unit != 0)
 					rate.Value = value / unit;
-			}
+			}			
+		}
+		private void Fuggveny3()
+		{
+			chartRateData.DataSource = Rates;
+
+			var series = chartRateData.Series[0];
+			series.ChartType = SeriesChartType.Line;
+			series.XValueMember = "Date";
+			series.YValueMembers = "Value";
+			series.BorderWidth = 2;
+
+			var legend = chartRateData.Legends[0];
+			legend.Enabled = false;
+
+			var chartArea = chartRateData.ChartAreas[0];
+			chartArea.AxisX.MajorGrid.Enabled = false;
+			chartArea.AxisY.MajorGrid.Enabled = false;
+			chartArea.AxisY.IsStartedFromZero = false;
 		}
 	}
 }
