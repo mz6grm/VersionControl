@@ -20,18 +20,25 @@ namespace hatodik
 		public Form1()
 		{
 			InitializeComponent();
+			RefreshData();
+		}
+
+		private void RefreshData()
+		{
+			Rates.Clear();
 			Fuggveny();
 			dataGridView1.DataSource = Rates;
 			chartRateData.DataSource = Rates;
 			Fuggveny2();
 			Fuggveny3();
 		}
+
 		string result;
 		public void Fuggveny()
 		{
 			dataGridView1.DataSource = Rates;
 			var mnbService = new MNBArfolyamServiceSoapClient();
-			var request = new GetExchangeRatesRequestBody()
+			var request = new GetExchangeRatesRequestBody() //ezt kéne módosítani még (7.)
 			{
 				currencyNames = "EUR",
 				startDate = "2020-01-01",
@@ -82,6 +89,21 @@ namespace hatodik
 			chartArea.AxisX.MajorGrid.Enabled = false;
 			chartArea.AxisY.MajorGrid.Enabled = false;
 			chartArea.AxisY.IsStartedFromZero = false;
+		}
+
+		private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+		{
+			RefreshData();
+		}
+
+		private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+		{
+			RefreshData();
+		}
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			RefreshData();
 		}
 	}
 }
