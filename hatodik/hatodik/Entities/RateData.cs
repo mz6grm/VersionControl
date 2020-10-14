@@ -8,8 +8,8 @@ namespace hatodik.Entities
 {
 	public class RateData
 	{
-		DateTime Date;
-		string Currency;
-		Decimal Value;
+		public DateTime Date;
+		public string Currency;
+		public Decimal Value;
 	}
 }
