@@ -17,14 +17,15 @@ namespace hetedikgyak
 		List<Person> Population = new List<Person>();
 		List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
 		List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
-		public Form1()
+        Random rng = new Random(1234);
+        public Form1()
 		{
 			InitializeComponent();
 
             Population = GetPopulation(@"C:\Temp\nép-teszt.csv");
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
-            dataGridView1.DataSource = Population;
+            dataGridView1.DataSource = DeathProbabilities;
         }
         public List<Person> GetPopulation(string csvpath)
         {
