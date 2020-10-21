@@ -19,14 +19,17 @@ namespace hetedikgyak
 		List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
         Random rng = new Random(1234);
         public Form1()
-		{
-			InitializeComponent();
+        {
+            InitializeComponent();
 
             Population = GetPopulation(@"C:\Temp\nép-teszt.csv");
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
-            dataGridView1.DataSource = DeathProbabilities;
+            //dataGridView1.DataSource = DeathProbabilities;            
+        }
 
+        private void Simulation()
+        {
             for (int year = 2005; year <= 2024; year++)
             {
                 // Végigmegyünk az összes személyen
@@ -45,6 +48,7 @@ namespace hetedikgyak
                     string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
             }
         }
+
         public List<Person> GetPopulation(string csvpath)
         {
             List<Person> population = new List<Person>();
@@ -142,6 +146,18 @@ namespace hetedikgyak
                     Population.Add(újszülött);
                 }
             }
+        }
+
+        private void btn_Start_Click(object sender, EventArgs e)
+        {
+            Simulation();
+        }
+
+        private void btn_Browse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            //textBox1.Text = "C:\Temp\nép.csv";
+            //folytatás
         }
     }
 }
