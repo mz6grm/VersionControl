@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace nyolcadik.Entities
 {
-	public class BallFactory : IToyInterface
+	public class CarFactory : IToyInterface
 	{
 		public Toy CreateNew()
 		{
-			return new Ball();
+			return new Car();
 		}
 	}
 }
