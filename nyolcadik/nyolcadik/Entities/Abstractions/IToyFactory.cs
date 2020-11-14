@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace nyolcadik.Entities
+namespace nyolcadik.Entities.Abstractions
 {
-	public class BallFactory : IToyInterface
+	public interface IToyFactory
 	{
-		public Toy CreateNew()
-		{
-			return new Ball();
-		}
+		Toy CreateNew();
 	}
 }
