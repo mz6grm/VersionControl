@@ -28,11 +28,11 @@ namespace UnitTestExample.Test
 		}
 				
 		[Test,
-		TestCase("Abcd", false),
-		TestCase("ABCD", false),
-		TestCase("abcd", false),
-		TestCase("Ab1", false),
-		TestCase("abcd1234", true)]
+		TestCase("ABCD1234", false),
+		TestCase("Ab1234", false),
+		TestCase("Abcd1234", true),
+		TestCase("abcd1234", false),
+		TestCase("abcdABCD", false)]
 		public void TestValidatePassword(string password, bool expectedResult)
 		{
 			// Arrange
@@ -48,6 +48,25 @@ namespace UnitTestExample.Test
 		public void Password_Validate()
 		{
 
+		}
+
+		[
+		Test,
+		TestCase("irf@uni-corvinus.hu", "Abcd1234"),
+		TestCase("irf@uni-corvinus.hu", "Abcd1234567"),
+		]
+		public void TestRegisterHappyPath(string email, string password)
+		{
+			// Arrange
+			var accountController = new AccountController();
+
+			// Act
+			var actualResult = accountController.Register(email, password);
+
+			// Assert
+			Assert.AreEqual(email, actualResult.Email);
+			Assert.AreEqual(password, actualResult.Password);
+			Assert.AreNotEqual(Guid.Empty, actualResult.ID);
 		}
 	}
 }
