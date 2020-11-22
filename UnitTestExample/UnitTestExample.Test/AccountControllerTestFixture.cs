@@ -3,6 +3,7 @@ using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using UnitTestExample.Controllers;
@@ -46,9 +47,17 @@ namespace UnitTestExample.Test
 			Assert.AreEqual(expectedResult, actualResult);
 		}
 
-		public void Password_Validate()
+		public bool Password_Validate(string password)
 		{
-
+			var accountController = new AccountController();
+			bool van = false;
+			if (Regex.IsMatch(
+			Convert.ToString(accountController.Equals(password)),
+			@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"))
+			{
+				van = true;
+			}
+			return (van);
 		}
 
 		[
